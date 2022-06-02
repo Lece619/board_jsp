@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
 <title>회원가입</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
 <style>
 	input[type='button'], input[type='submit']{border-radius: 0;}
 	textarea{

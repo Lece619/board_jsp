@@ -33,14 +33,37 @@ public class MemberFrontController extends HttpServlet{
 		ActionForward forward = new ActionForward();
 		
 		//이프나 스위치 ->원하는 컨트롤러로 보내준다.
+		//아이디 체크시 *.me 이 서블릿에 들어오게되고 커맨드분석
+		//아이디 체크
 		if(command.equals("/member/MemberCheckIdOk.me")) {
 			try {
 				forward = new MemberCheckIdOk().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println("아이디 중복검사 오류 "+ e);
 			}
+			//회원가입
 		}else if(command.equals("/member/MemberJoinOk.me")) {
-			
+			try {
+				forward = new MemberJoinOk().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println("회원가입 오류" + e);
+			}
+			//단순 페이지 이동이라 OK가 안들어감
+		}else if(command.equals("/member/MemberLoginOk.me")) {
+			try {
+				forward = new MemberLoginOk().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println("로그인 오류" + e);
+			}
+			//단순 페이지 이동이라 OK가 안들어감
+		}else if(command.equals("/member/MemberLogin.me")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/app/member/login.jsp");
+		}else if(command.equals("/member/MemberJoin.me")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/app/member/join.jsp");
 		}
 		
 		if(forward != null) {
