@@ -7,6 +7,15 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
 <title>회원가입</title>
+<style>
+	input[type='button'], input[type='submit']{border-radius: 0;}
+	textarea{
+	resize:none;
+	}
+	div.preview{overflow:hidden;}
+	div.preview img{
+		object-fit : cover;}
+</style>
 </head>
 <body class="is-preload">
 	<!-- Page Wrapper -->
@@ -70,21 +79,24 @@
 												<input type="checkbox" id="term1" name="term1" class="terms">
 												<label for="term1">서비스 이용약관</label>
 											</div>
-											<div>
+											<div class="term-detail">
 												<a href="term1-content">펼쳐보기</a>
 											</div>
-											<textarea name="term1-content" id="term1-content" rows="3" style="display: none"></textarea>
 										</div>
+										<textarea name="term1-content" id="term1-content" rows="3" style="display: none" 
+										readonly="readonly"></textarea>
+										<br>
 										<div class="col-12" style="display:flex; justify-content: space-between">
 											<div>
 												<input type="checkbox" id="term2" name="term2" class="terms">
 												<label for="term2">개인정보 수집 및 이용</label>
 											</div>
-											<div>
+											<div class="term-detail">
 												<a href="term2-content">펼쳐보기</a>
 											</div>
-											<textarea name="term2-content" id="term2-content" rows="3" style="display: none"></textarea>
 										</div>
+										<textarea name="term2-content" id="term2-content" rows="3" style="display: none" 
+										readonly="readonly"></textarea>
 										<br>	
 									</div>
 								</div>
@@ -125,7 +137,7 @@
 								<div class="col-12" style="margin-top:8%">
 									<ul class="actions" style="display:felx;justify-content: center;">
 										<li>
-											<input type="button" value="완료" class="primary" onclick="">
+											<input type="button" value="완료" class="primary" onclick="formSubmit()">
 										</li>
 										<li>
 											<input type="button" value="취소" class="primary" onclick="history.back()">
@@ -137,17 +149,17 @@
 							<div class="preview" style="width:40%;">
 								<div>
 									<h4>광고1</h4>
-									<img src="${pageContext.request.contextPath}/images/ex01.png" width=100%;>
+									<img src="${pageContext.request.contextPath}/images/ex01.png" >
 								</div>
 								<hr>
 								<div>
 									<h4>광고2</h4>
-									<img src="${pageContext.request.contextPath}/images/ex02.png" width=100%;>
+									<img src="${pageContext.request.contextPath}/images/ex02.png" >
 								</div>
 								<hr>
 								<div>
 									<h4>광고3</h4>
-									<img src="${pageContext.request.contextPath}/images/ex03.png" width=100%;>
+									<img src="${pageContext.request.contextPath}/images/ex03.png">
 								</div>
 							</div>
 						</div>
@@ -162,6 +174,8 @@
 <script src="${pageContext.request.contextPath}/assets/js/breakpoints.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/util.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+<script> var contextPath = "${pageContext.request.contextPath}"</script>
+<script src="${pageContext.request.contextPath}/app/member/join.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 </html>

@@ -16,6 +16,8 @@ public class MemberCheckIdOk implements Action {
 	
 	@Override
 	public ActionForward execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
 		String memberId = req.getParameter("memberId");
 		MemberDAO dao = new MemberDAO();
 		JSONObject obj = new JSONObject();
@@ -27,7 +29,7 @@ public class MemberCheckIdOk implements Action {
 		}else {
 			obj.put("status", "ok");
 		}
-		//바디위치에 Parsing이 된다.
+		//바디위치에 Parsing이 된다. => {status : ok} {status : not-ok} 둘중하나로 받아진다.
 		out.println(obj.toJSONString());
 		out.close();
 		return null;

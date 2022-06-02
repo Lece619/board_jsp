@@ -12,6 +12,8 @@ package com.hds.app.member.vo;
 public class MemberVO {
 	private String memberId;
 	private String memberPw;
+	private String memberName;
+
 	private int memberAge;
 	private String memberGender;
 	private String memberEmail;
@@ -38,6 +40,14 @@ public class MemberVO {
 
 	public void setMemberPw(String memberPw) {
 		this.memberPw = memberPw;
+	}
+	
+	public String getMemberName() {
+		return memberName;
+	}
+	
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public int getMemberAge() {
