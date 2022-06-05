@@ -1,4 +1,4 @@
-package com.hds.app.member.controller;
+package com.hds.app.board.controller;
 
 import java.io.IOException;
 
@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hds.app.action.ActionForward;
 
-//서블릿의 역할을 해줘야한다.
-public class MemberFrontController extends HttpServlet{
+public class BoardFrontController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doProcess(req, resp);
@@ -31,43 +30,20 @@ public class MemberFrontController extends HttpServlet{
 		String command = requestURI.substring(contextPath.length());
 		
 		ActionForward forward = new ActionForward();
-		
-		//이프나 스위치 ->원하는 컨트롤러로 보내준다.
-		//아이디 체크시 *.me 이 서블릿에 들어오게되고 커맨드분석
-		//아이디 체크
-		if(command.equals("/member/MemberCheckIdOk.me")) {
+		System.out.println(command);
+		if(command.equals("/board/BoardListOk.bo")) {
 			try {
-				forward = new MemberCheckIdOk().execute(req, resp);
+				forward = new BoardListOk().execute(req, resp);
 			} catch (Exception e) {
-				System.out.println("아이디 중복검사 오류 "+ e);
+				System.out.println("/board/BoardList.bo 이동 중 오류  : " + e);
 			}
-			//회원가입
-		}else if(command.equals("/member/MemberJoinOk.me")) {
+			//로그인 성공시 게시판 이동 
+		}else if(command.equals("/board/BoardList.bo")) {
+			System.out.println("들어옴");
 			try {
-				forward = new MemberJoinOk().execute(req, resp);
+				forward = new BoardListOk().execute(req, resp);
 			} catch (Exception e) {
-				System.out.println("회원가입 오류" + e);
-			}
-		}else if(command.equals("/member/MemberLoginOk.me")) {
-			try {
-				forward = new MemberLoginOk().execute(req, resp);
-			} catch (Exception e) {
-				System.out.println("로그인 오류" + e);
-			}
-			//단순 페이지 이동이라 OK가 안들어감
-		}else if(command.equals("/member/MemberLogin.me")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("/app/member/login.jsp");
-		}else if(command.equals("/member/MemberJoin.me")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("/app/member/join.jsp");
-		}else if(command.equals("/member/MemberLogoutOk.me")) {
-			try {
-				forward = new MemberLogoutOk().execute(req, resp);
-			} catch (Exception e) {
-				System.out.println("로그아웃 오류" + e);
+				System.out.println("/board/BoardList.bo 이동 중 오류  : " + e);
 			}
 		}
 		
@@ -75,6 +51,7 @@ public class MemberFrontController extends HttpServlet{
 			//Redirect 가 true 면 정보를 붙일 필요없이 그대로 보내주고 
 			if(forward.isRedirect()) {
 				resp.sendRedirect(forward.getPath());
+				
 				//아니라면 디스패처에 정보를 붙여서 보내준다.
 			}else {
 				RequestDispatcher dispatcher = req.getRequestDispatcher(forward.getPath());

@@ -29,7 +29,7 @@ public class MemberLoginOk implements Action {
 		//성공했을때. 세션이 필요하다.
 		if(dao.login(memberId, memberPw)) {
 			session.setAttribute("sessionId", memberId);
-			forward.setPath(req.getContextPath()+"/board/BoradList.bo");
+			forward.setPath(req.getContextPath()+"/board/BoardListOk.bo");
 		}else {
 			forward.setPath(req.getContextPath()+"/member/MemberLogin.me?code=false");
 		}

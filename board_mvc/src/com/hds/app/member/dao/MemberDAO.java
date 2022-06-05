@@ -32,6 +32,7 @@ public class MemberDAO {
 		Map<String, String> map = new HashMap<>();
 		map.put("memberId", memberId);
 		map.put("memberPw", memberPw);
+		
 		return (Integer)(sqlSession.selectOne("Member.login",map)) == 1;
 	}
 	

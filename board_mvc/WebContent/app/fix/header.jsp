@@ -23,7 +23,7 @@
 			</c:when>
 			<c:otherwise>
 				<li>
-					<a href="javascript:void(0)">로그아웃</a>
+					<a href="${pageContext.request.contextPath}/member/MemberLogoutOk.me">로그아웃</a>
 				</li>
 			</c:otherwise>
 		</c:choose>
