@@ -31,5 +31,6 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry exported="true" kind="lib" path="C:/jsp_jinho/resource/jakarta-taglibs-standard-1.1.2/jakarta-taglibs-standard-1.1.2/lib/jstl.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/jsp_jinho/resource/jakarta-taglibs-standard-1.1.2/jakarta-taglibs-standard-1.1.2/lib/standard.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/jsp_jinho/resource/cos-22.05/lib/cos.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

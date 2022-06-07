@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias type="com.hds.app.member.vo.MemberVO" alias="member"/>
 		<typeAlias type="com.hds.app.board.vo.BoardVO" alias="board"/>
+		<typeAlias type="com.hds.app.files.vo.FilesVO" alias="files"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -23,6 +24,7 @@
 	<mappers>
 		<mapper resource="com/hds/app/mybatis/sql/member.xml"/>
 		<mapper resource="com/hds/app/mybatis/sql/board.xml"/>
+		<mapper resource="com/hds/app/mybatis/sql/files.xml"/>
 	</mappers>
 </configuration>
 	

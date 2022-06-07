@@ -17,4 +17,37 @@
 	<select id="getTotal" resultType="_int">
 		SELECT COUNT(BOARDNUM) FROM TBL_BOARD
 	</select>
+	
+	<insert id="insertBoard" parameterType="board">
+		INSERT INTO TBL_BOARD
+		(BOARDNUM, BOARDTITLE, BOARDCONTENT, BOARDID)
+		VALUES(SEQ_BOARD.NEXTVAL, #{boardTitle}, #{boardContent}, #{boardId})
+		
+	</insert>
+	
+	<select id="getSeq" resultType="_int">
+		SELECT SEQ_BOARD.CURRVAL FROM DUAL
+	</select>
+	
+	<select id="getDetail" parameterType="_int" resultType="board">
+		SELECT BOARDNUM, BOARDTITLE, BOARDCONTENT, BOARDID, BOARDDATE, READCOUNT
+		FROM TBL_BOARD WHERE BOARDNUM = #{boardNum}
+	</select>
+	
+	<update id="updateReadCount" parameterType="_int">
+		UPDATE TBL_BOARD
+		SET READCOUNT = READCOUNT+1
+		WHERE BOARDNUM = #{boardNum}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="_int">
+		DELETE FROM TBL_BOARD
+		WHERE BOARDNUM = #{boardNum}
+	</delete>
+	
+	<update id="updateBoard" parameterType="board">
+		UPDATE TBL_BOARD
+		SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent}
+		WHERE BOARDNUM = #{boardNum}
+	</update>
 </mapper>

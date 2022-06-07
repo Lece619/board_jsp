@@ -30,7 +30,6 @@ public class BoardFrontController extends HttpServlet{
 		String command = requestURI.substring(contextPath.length());
 		
 		ActionForward forward = new ActionForward();
-		System.out.println(command);
 		if(command.equals("/board/BoardListOk.bo")) {
 			try {
 				forward = new BoardListOk().execute(req, resp);
@@ -39,11 +38,61 @@ public class BoardFrontController extends HttpServlet{
 			}
 			//로그인 성공시 게시판 이동 
 		}else if(command.equals("/board/BoardList.bo")) {
-			System.out.println("들어옴");
 			try {
 				forward = new BoardListOk().execute(req, resp);
 			} catch (Exception e) {
 				System.out.println("/board/BoardList.bo 이동 중 오류  : " + e);
+			}
+		}else if(command.equals("/board/BoardWrite.bo")){
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/app/board/boardWrite.jsp");
+			
+		}else if(command.equals("/board/BoardWriteOk.bo")){
+			try {
+				forward = new BoardWriteOk().execute(req, resp);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			//게시글 상세보기
+		}else if(command.equals("/board/BoardViewOk.bo")) {
+			try {
+				forward = new BoardViewOk().execute(req, resp);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			//첨부파일 다운로드/board/FileDownloadOk.bo
+		}else if(command.equals("/board/FileDownload.bo")) {
+			try {
+				forward = new FileDownloadOk().execute(req, resp);
+			} catch (Exception e) {
+				System.out.println("파일 다운중 문제 생김");
+				e.printStackTrace();
+			}
+			//글 삭제
+		}else if(command.equals("/board/BoardDeleteOk.bo")) {
+			try {
+				forward = new BoardDeleteOk().execute(req, resp);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			} 
+			//수정
+		}else if(command.equals("/board/BoardModify.bo")) {
+				try {
+					forward = new BoardModify().execute(req, resp);
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+		}else if(command.equals("/board/BoardModifyOk.bo")) {
+			try {
+				forward = new BoardModifyOk().execute(req, resp);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
 			}
 		}
 		
