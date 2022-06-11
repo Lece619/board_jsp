@@ -25,4 +25,9 @@
 		WHERE memberId = #{memberId} AND memberPw = #{memberPw}
 	</select>
 	
+	<select id="findId" parameterType="map" resultType="string">
+		SELECT MEMBERID FROM TBL_MEMBER
+		WHERE MEMBEREMAIL = #{memberEmail} AND MEMBERPW = #{memberPw}
+	</select>
+	
 </mapper>

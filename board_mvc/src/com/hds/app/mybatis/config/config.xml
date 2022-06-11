@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias type="com.hds.app.member.vo.MemberVO" alias="member"/>
 		<typeAlias type="com.hds.app.board.vo.BoardVO" alias="board"/>
+		<typeAlias type="com.hds.app.board.vo.BoardReplyVO" alias="reply"/>
 		<typeAlias type="com.hds.app.files.vo.FilesVO" alias="files"/>
 	</typeAliases>
 	

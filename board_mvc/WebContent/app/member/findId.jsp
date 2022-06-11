@@ -41,28 +41,24 @@
 			<section class="main">
 				<header class="major">
 					<a href="#" class="image main"><img src="${pageContext.request.contextPath}/images/login01.png" alt="" /></a>
-					<h1>로그인</h1>
+					<h1>아이디 찾기</h1>
 				</header>
 				<hr />
-				<form method="post" action="${pageContext.request.contextPath}/member/MemberLoginOk.me" name="loginForm">
+				<form method="post" action="${pageContext.request.contextPath}/member/MemberFindIdOk.me" name="loginForm">
 					<div style="display:flex; justify-content:space-evenly;">
 						<div style="width:40%">
 								<div>
 									<div class="col-6 col-12-xsmall" style="width:100%">
-										<p style="margin:0;">아이디 </p>
-										<input type="text" name="memberId" id="memberId" value=""/>
+										<p style="margin:0;">이메일 </p>
+										<input type="text" name="memberEmail" id="memberEmail" value=""/>
 										<br>
 										<p style="margin:0;">비밀번호</p>
 										<input type="password" name="memberPw" id="memberPw" value=""/>
-										<div style="text-align:center; margin-top:9%">
-											<a href="${pageContext.request.contextPath}/member/MemberFindId.me">아이디 찾기</a><span>&nbsp;|&nbsp;</span><a href="#">비밀번호 찾기</a>
-										</div>
 									</div>
 								</div>
 								<div class="col-12">
 									<ul class="actions" style="display:block; text-align:center; margin-top:9%">
-										<li><input type="button" value="로그인" class="primary" style="width:100%; font-size:1em;" onclick="check()"/></li>
-										<li><input type="button" value="회원가입" style="width:100%; font-size:1em;" onclick="location.href='${pageContext.request.contextPath}/member/MemberJoin.me'"/></li>
+										<li><input type="button" value="아이디 찾기" class="primary" style="width:100%; font-size:1em;" onclick="check()"/></li>
 									</ul>
 								</div>
 							</div>
@@ -81,6 +77,20 @@
 <script src="${pageContext.request.contextPath}/assets/js/breakpoints.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/util.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
-<script src="${pageContext.request.contextPath}/app/member/login.js"></script>
-
+<script>
+	function check(){
+		let form = document.loginForm;
+		if(!form.memberEmail.value){
+			alert("이메일을 입력해주세요.");
+			form.memberEmail.focus();
+			return;
+		}
+		if(!form.memberPw.value){
+			alert("비밀번호를 입력해주세요.");
+			form.memberPw.focus();
+			return;
+		}
+		form.submit();
+	}
+</script>
 </html>

@@ -36,6 +36,14 @@ public class MemberDAO {
 		return (Integer)(sqlSession.selectOne("Member.login",map)) == 1;
 	}
 	
+	//아이디 찾기
+	public String findId(String memberEmail,String memberPw) {
+		HashMap<String, String> memberMap = new HashMap<>();
+		memberMap.put("memberEmail", memberEmail);
+		memberMap.put("memberPw", memberPw);
+		
+		return sqlSession.selectOne("Member.findId",memberMap);
+	}
 	
 	
 }

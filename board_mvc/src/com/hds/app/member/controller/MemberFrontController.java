@@ -70,6 +70,20 @@ public class MemberFrontController extends HttpServlet{
 				System.out.println("로그아웃 오류" + e);
 			}
 		}
+		//아이디 찾기
+		else if(command.equals("/member/MemberFindIdOk.me")) {
+			
+			try {
+				forward = new MemberFindIdOk().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/member/MemberFindId.me")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/app/member/findId.jsp");
+		}
 		
 		if(forward != null) {
 			//Redirect 가 true 면 정보를 붙일 필요없이 그대로 보내주고 
@@ -77,6 +91,7 @@ public class MemberFrontController extends HttpServlet{
 				resp.sendRedirect(forward.getPath());
 				//아니라면 디스패처에 정보를 붙여서 보내준다.
 			}else {
+				//디스패쳐에 경로를 넣을때!! ContextPath는 이미 들어가있어서 forward패스만 추가하는것.
 				RequestDispatcher dispatcher = req.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(req, resp);
 			}

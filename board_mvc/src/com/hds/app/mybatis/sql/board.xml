@@ -50,4 +50,29 @@
 		SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent}
 		WHERE BOARDNUM = #{boardNum}
 	</update>
+	<!-- **********댓글 부분************* -->
+	<select id="getReplyList" parameterType="_int" resultType="reply">
+		SELECT REPLYNUM, BOARDNUM, MEMBERID, REPLYCONTENT 
+		FROM TBL_REPLY
+		WHERE BOARDNUM = #{boardNum}
+		ORDER BY REPLYNUM DESC
+	</select>
+	
+	<insert id="insertReply" parameterType="reply">
+		INSERT INTO TBL_REPLY
+		(REPLYNUM, BOARDNUM, MEMBERID, REPLYCONTENT)
+		VALUES(SEQ_REPLY.NEXTVAL, #{boardNum}, #{memberId}, #{replyContent})
+	</insert>
+	
+	<update id="updateReply" parameterType="reply">
+		UPDATE TBL_REPLY
+		SET REPLYCONTENT = #{replyContent}
+		WHERE REPLYNUM = #{replyNum}
+	</update>
+	
+	<delete id="deleteReply" parameterType="_int">
+		DELETE FROM TBL_REPLY
+		WHERE REPLYNUM = #{replyNum}
+	</delete>
+	
 </mapper>

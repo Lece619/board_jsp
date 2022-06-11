@@ -88,6 +88,18 @@
 					<hr />
 					<h3><pre>${board.getBoardContent()}</pre></h3>
 				</section>
+				<section class="main accent2" style="padding:3%">
+					<header class="major" style="text-align:left;">
+						<h2>댓글</h2>
+						<p>여러분의 소중한 댓글을 작성해주세요.</p>
+					</header>
+					<form method="post" action="#" class="combined" style="width:auto;">
+						<textarea name="content" id="content" placeholder="비속어를 사용하지 말아주세요." class="invert" rows="5" style="border-radius:0; resize:none;"></textarea>
+						<input id="register" type="button" class="primary" value="등록" onclick="comment()"/>
+					</form>
+					<form id="replies" class="combined" style="flex-direction:column; margin:0; display:contents;">
+					</form>
+				</section>
 			</div>
 		</div>
 	</div>
@@ -97,4 +109,126 @@
 <script src="${pageContext.request.contextPath}/assets/js/breakpoints.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/util.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+<script>
+	$(document).ready(function(){getList();});
+	
+	let pageContext = "${pageContext.request.contextPath}";
+	let boardNum = "${board.getBoardNum()}";
+	
+	function getList(){
+		$.ajax({
+			url: pageContext + "/board/BoardReplyListOk.bo?boardNum=" + boardNum,
+			type: "get",
+			dataType: "json",
+			success: showList
+		});
+	}
+	
+	let replyList;
+	
+	function showList(replies){
+		replyList = replies;
+		let text = "";
+		if(replies != null && replies.length != 0){
+			$.each(replies, function(index, reply){
+				text += "<div id='reply'>";
+				text += "<p class='writer'>"+reply.memberId+"</p>";
+				text += "<div class='content' id='" + (index +1 ) + "' style='width:100%'><pre>" + reply.replyContent + "</pre></div>";
+				if("${sessionId}" == reply.memberId){
+					text += "<input type='button' id='ready" + (index + 1) + "' class='primary' onclick=readyToUpdate(" + (index+1) + ") value='수정'>"
+					text += "<input type='button' id='ok" + (index + 1) + "' class='primary' style='display:none' onclick=update(" + (index + 1) + "," + reply.replyNum + ") value='수정완료'>"
+					text += "<input type='button' id='remove" + (index + 1) + "' class='primary' onclick=deleteReply(" + reply.replyNum + ") value='삭제'>"	
+				}
+				text += "</div>";
+			});
+		}else{
+			text = "<p>댓글이 없습니다.</p>"
+		}
+		$("#replies").html(text);
+	}
+
+	
+	function comment(){
+		let replyContent = $("textarea[name='content']").val();
+		$.ajax({
+			url: pageContext + "/board/BoardReplyWriteOk.bo",
+			type: "post",
+			data: {"boardNum": boardNum, "replyContent": replyContent},
+			success: function(){
+				$("textarea[name='content']").val("");
+				getList();
+			}
+		});
+	}
+	
+	let check = false;
+	
+	//수정 버튼 
+	function readyToUpdate(index){
+		let div = $("#"+index);
+		let modifyReady = $("#ready" + index);
+		let modifyOk = $("#ok" + index);
+		let remove=$("#remove"+index);
+		
+		//원래 텍스트를 택스트에어리어로 바꿔서 보여주기
+		 if(!check){
+			div.replaceWith("<textarea name='replyContent' id='"+ index +"' class='invert' style='border-radius:0; resize:none;'>" + div.text() + "</textarea>");
+			remove.replaceWith("<input type='button' id='cancel" + index +"' value='취소' onclick=updateCancel(" + index + ")>");
+			modifyReady.hide();
+			modifyOk.show();
+			check = true;
+		 }else{	
+			alert("수정중인 댓글이 있습니다.")
+		}
+	} 
+	
+	//수정 취소 버튼
+	function updateCancel(index){
+		let remove = $("#cancel"+index);
+		let textarea = $("#"+index);//textarea 를 div로 바꿔줄것
+		let modifyReady = $("#ready"+index);
+		let modifyOk =$("#ok"+index);
+		
+		
+		modifyReady.show();
+		modifyOk.hide();
+		remove.replaceWith("<input type='button' id='remove" + index + "' class='primary' onclick='' value='삭제'>");
+		textarea.replaceWith("<div class='content' id='" + index + "' style='width:100%'><pre>"+ replyList[index-1].replyContent + "</pre></div>");
+		check=false;
+	}
+	
+	//수정 완료
+	function update(index, replyNum){
+		let replyContent = $("textarea#"+index).val(); //사용자가 수정할 글을 가져옴
+		
+		let json = new Object(); //json 오브젝트를 만들것
+		json.replyNum = replyNum;
+		json.replyContent = replyContent;
+		
+		$.ajax({
+			url : pageContext + "/board/BoardReplyModifyOk.bo",
+			type : "post",
+			data : json,
+			success: function(){
+				check = false;
+				getList();
+			}
+		});
+	}
+	
+	//댓글 삭제
+	function deleteReply(replyNum){
+		$.ajax({
+			url : pageContext + "/board/BoardReplyDeleteOk.bo",
+			type : "post",
+			data : {"replyNum" : replyNum},
+			success: function(){
+				check = false;
+				getList();
+			}
+		});
+	} 
+	
+</script>
+
 </html>

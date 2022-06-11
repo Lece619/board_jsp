@@ -95,6 +95,37 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		///////////////Q*****************댓글부분*************
+		else if(command.equals("/board/BoardReplyListOk.bo")) {
+			try {
+				forward = new BoardReplyListOk().execute(req, resp);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+		}else if(command.equals("/board/BoardReplyWriteOk.bo")) {
+			try {
+				forward = new BoardReplyWriteOk().execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/board/BoardReplyModifyOk.bo")) {
+			try {
+				forward = new BoardReplyModifyOk().execute(req, resp);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+		}else if(command.equals("/board/BoardReplyDeleteOk.bo")) {
+			try {
+				forward = new BoardReplyDeleteOk().execute(req, resp);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+		}
+	
+		
 		
 		if(forward != null) {
 			//Redirect 가 true 면 정보를 붙일 필요없이 그대로 보내주고 
