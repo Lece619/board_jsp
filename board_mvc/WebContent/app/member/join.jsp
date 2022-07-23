@@ -31,7 +31,7 @@
 		<!-- Wrapper -->
 		<div class="wrapper">
 			<div class="inner">
-				<!-- Main -->
+				<!-- Main -->	
 				<section class="main">
 					<header class="major">
 						<a href="javascript:void(0)" class="image main"><img src="${pageContext.request.contextPath}/images/join01.png"></a>

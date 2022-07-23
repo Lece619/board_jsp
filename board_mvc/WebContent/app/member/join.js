@@ -14,7 +14,7 @@ $(".term-detail a").on("click", function(e){
 	e.preventDefault();//가지못하게 막음
 	if($("#"+$(this).attr("href")).css("display")=="none"){
 		$("#"+$(this).attr("href")).show();
-		$(this).html("닫기");
+		$(this).html("닫기");	
 	}else{
 		$("#"+$(this).attr("href")).hide();
 		$(this).html("펼쳐보기");
@@ -85,7 +85,7 @@ function formSubmit(){
 	}
 	
 	//비밀번호 안에 아이디가 있을 때
-	if(form.memberPw.value.search(form.memberId.value) != -1){
+	if((form.memberPw.value.search(form.memberId.value) != -1)){
 		alert("비밀번호에 아이디를 포함할 수 없습니다.");
 		form.memberPw.focus();
 		return;
@@ -167,6 +167,7 @@ function checkId(id){
 // 인풋테그중 이름이 memberid에 keyup이 일어날 때마다
 $("input[name='memberId']").keyup(function(){
 	checkId($(this).val());
+	alert(form.profileImg.files.length);
 });
 
 
